@@ -81,11 +81,15 @@ void copiazaAnumiteElemente(struct Depozit* vector, char nrElemente, float prag,
 struct Depozit getPrimulElementConditionat(struct Depozit* vector, int nrElemente, const char* numeCautat) {
 	Depozit s;
 	s.id = -1;
+	s.suprafata = 0;
+	s.volum = 0;
 	s.denumire = NULL;
+	s.clasa = '-';
 
 	for (int i = 0; i < nrElemente; i++) {
 		if (strcmp(numeCautat, vector[i].denumire) == 0) {
 			s = copiaza(vector[i]);
+			return s;
 		}
 	}
 
