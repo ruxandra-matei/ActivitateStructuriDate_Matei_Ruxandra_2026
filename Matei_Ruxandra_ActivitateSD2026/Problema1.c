@@ -96,6 +96,14 @@ struct Depozit getPrimulElementConditionat(struct Depozit* vector, int nrElement
 	return s;
 }
 
+int calculeazaVolumTotal(Depozit * vector, int nrElemente) {
+	int suma = 0;
+	for (int i = 0; i < nrElemente; i++) {
+		suma += vector[i].volum;
+		}
+	return suma;
+	}
+
 int main() {
 	struct Depozit depozit = initializare(1, 34.3, 70, "Emag", 'A');
 	afisare(depozit);
@@ -139,5 +147,6 @@ int main() {
 	free(depozit.denumire);
 	dezalocare(&vector, &nrDepozite);
 
+	printf("\nVolum total: %d\n", calculeazaVolumTotal(vector, nrDepozite));
 	return 0;
 }
