@@ -2,5 +2,5 @@
 E:\ASE\sem 3.2\4. SDD\ActivitateSD2026\Matei_Ruxandra_ActivitateSD2026\Problema1.c(19,45): warning C4013: 'strlen' undefined; assuming extern returning int
 E:\ASE\sem 3.2\4. SDD\ActivitateSD2026\Matei_Ruxandra_ActivitateSD2026\Problema1.c(20,2): warning C4013: 'strcpy' undefined; assuming extern returning int
 E:\ASE\sem 3.2\4. SDD\ActivitateSD2026\Matei_Ruxandra_ActivitateSD2026\Problema1.c(90,7): warning C4013: 'strcmp' undefined; assuming extern returning int
-E:\ASE\sem 3.2\4. SDD\ActivitateSD2026\Matei_Ruxandra_ActivitateSD2026\Problema1.c(108,43): warning C4305: 'function': truncation from 'double' to 'float'
+E:\ASE\sem 3.2\4. SDD\ActivitateSD2026\Matei_Ruxandra_ActivitateSD2026\Problema1.c(121,43): warning C4305: 'function': truncation from 'double' to 'float'
   Matei_Ruxandra_ActivitateSD2026.vcxproj -> E:\ASE\sem 3.2\4. SDD\ActivitateSD2026\Matei_Ruxandra_ActivitateSD2026\x64\Debug\Matei_Ruxandra_ActivitateSD2026.exe

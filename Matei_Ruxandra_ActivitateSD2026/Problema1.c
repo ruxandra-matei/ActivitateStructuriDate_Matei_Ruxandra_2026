@@ -103,6 +103,19 @@ int calculeazaVolumTotal(Depozit * vector, int nrElemente) {
 		}
 	return suma;
 	}
+float calculeazaSuprafataMedie(Depozit* vector, int nrElemente) {
+	float suma = 0;
+
+	for (int i = 0; i < nrElemente; i++) {
+		suma += vector[i].suprafata;
+	}
+
+	if (nrElemente > 0) {
+		return suma / nrElemente;
+	}
+
+	return 0;
+}
 
 int main() {
 	struct Depozit depozit = initializare(1, 34.3, 70, "Emag", 'A');
@@ -145,6 +158,7 @@ int main() {
 	}
 
 	free(depozit.denumire);
+	printf("\nSuprafata medie: %.2f\n", calculeazaSuprafataMedie(vector, nrDepozite));
 	dezalocare(&vector, &nrDepozite);
 
 	printf("\nVolum total: %d\n", calculeazaVolumTotal(vector, nrDepozite));
