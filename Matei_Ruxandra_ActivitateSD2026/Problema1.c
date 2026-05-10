@@ -116,6 +116,13 @@ float calculeazaSuprafataMedie(Depozit* vector, int nrElemente) {
 
 	return 0;
 }
+void afisareDepoziteClasa(Depozit* vector, int nrElemente, char clasa) {
+	for (int i = 0; i < nrElemente; i++) {
+		if (vector[i].clasa == clasa) {
+			afisare(vector[i]);
+		}
+	}
+}
 
 int main() {
 	struct Depozit depozit = initializare(1, 34.3, 70, "Emag", 'A');
@@ -156,7 +163,8 @@ int main() {
 	if (depozitCautat.id != -1) {
 		free(depozitCautat.denumire);
 	}
-
+	printf("\nDepozite clasa A:\n");
+	afisareDepoziteClasa(vector, nrDepozite, 'A');
 	free(depozit.denumire);
 	printf("\nSuprafata medie: %.2f\n", calculeazaSuprafataMedie(vector, nrDepozite));
 	dezalocare(&vector, &nrDepozite);
