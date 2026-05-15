@@ -123,7 +123,76 @@ void afisareDepoziteClasa(Depozit* vector, int nrElemente, char clasa) {
 		}
 	}
 }
+typedef struct Nod Nod;
 
+struct Nod {
+	Depozit info;
+	Nod* stanga;
+	Nod* dreapta;
+};
+
+Nod* creeazaNod(Depozit d) {
+	Nod* nod = (Nod*)malloc(sizeof(Nod));
+	nod->info = copiaza(d);
+	nod->stanga = NULL;
+	nod->dreapta = NULL;
+	return nod;
+}
+
+Nod* inserareArbore(Nod* radacina, Depozit d) {
+	if (radacina == NULL) {
+		return creeazaNod(d);
+	}
+
+	if (d.id < radacina->info.id) {
+		radacina->stanga = inserareArbore(radacina->stanga, d);
+	}
+	else {
+		radacina->dreapta = inserareArbore(radacina->dreapta, d);
+	}
+
+	return radacina;
+}
+
+void afisareInOrdine(Nod* radacina) {
+	if (radacina != NULL) {
+		afisareInOrdine(radacina->stanga);
+		afisare(radacina->info);
+		afisareInOrdine(radacina->dreapta);
+	}
+}
+
+Depozit cautaDupaId(Nod* radacina, int id) {
+	if (radacina == NULL) {
+		Depozit d;
+		d.id = -1;
+		d.suprafata = 0;
+		d.volum = 0;
+		d.denumire = NULL;
+		d.clasa = '-';
+		return d;
+	}
+
+	if (id == radacina->info.id) {
+		return copiaza(radacina->info);
+	}
+
+	if (id < radacina->info.id) {
+		return cautaDupaId(radacina->stanga, id);
+	}
+
+	return cautaDupaId(radacina->dreapta, id);
+}
+
+void dezalocareArbore(Nod** radacina) {
+	if (*radacina != NULL) {
+		dezalocareArbore(&((*radacina)->stanga));
+		dezalocareArbore(&((*radacina)->dreapta));
+		free((*radacina)->info.denumire);
+		free(*radacina);
+		*radacina = NULL;
+	}
+}
 int main() {
 	struct Depozit depozit = initializare(1, 34.3, 70, "Emag", 'A');
 	afisare(depozit);
@@ -135,6 +204,23 @@ int main() {
 	vector[1] = initializare(3, 56, 89, "Amazon", 'A');
 	vector[2] = initializare(4, 45, 96, "DSC", 'A');
 	vector[3] = initializare(5, 34, 67, "Emag", 'A');
+	Nod* radacina = NULL;
+
+	for (int i = 0; i < nrDepozite; i++) {
+		radacina = inserareArbore(radacina, vector[i]);
+	}
+
+	printf("\nArbore afisat in ordine:\n");
+	afisareInOrdine(radacina);
+
+	Depozit depozitGasit = cautaDupaId(radacina, 4);
+
+	printf("\nDepozit gasit dupa id:\n");
+	afisare(depozitGasit);
+
+	if (depozitGasit.id != -1) {
+		free(depozitGasit.denumire);
+	}
 
 	afisareVector(vector, nrDepozite);
 	printf("\n\n");
@@ -170,5 +256,8 @@ int main() {
 	dezalocare(&vector, &nrDepozite);
 
 	printf("\nVolum total: %d\n", calculeazaVolumTotal(vector, nrDepozite));
+	
+	dezalocareArbore(&radacina);
+
 	return 0;
 }
